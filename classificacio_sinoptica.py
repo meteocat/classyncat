@@ -14,15 +14,14 @@ if __name__ == '__main__':
     PUNTS1 = './data/list_points_mslp'
     PUNTS2 = './data/list_points_500mb'
     # Calculem la latitud central que despres s'usara per J&C
-    CENLAT= calcula_centre_graella(PUNTS1)
-    GRID_SLP = llegeix_grib_punts(INPUT1,PUNTS1)
-    GRID_500 = llegeix_grib_punts(INPUT2,PUNTS2)
-    TIPUS_SFC = jenkinson_collison_sfc(GRID_SLP,CENLAT)
-    TIPUS_500 = jenkinson_collison_500(GRID_500,CENLAT)
-    CLASSIFICACIO= classyncat(TIPUS_SFC,TIPUS_500)
-    
-    
+    CENLAT = calcula_centre_graella(PUNTS1)
+    GRID_SLP = llegeix_grib_punts(INPUT1, PUNTS1)
+    GRID_500 = llegeix_grib_punts(INPUT2, PUNTS2)
+    TIPUS_SFC = jenkinson_collison_sfc(GRID_SLP, CENLAT)
+    TIPUS_500 = jenkinson_collison_500(GRID_500, CENLAT)
+    CLASSIFICACIO = classyncat(TIPUS_SFC, TIPUS_500)
+
     for dia in sorted(TIPUS_500):
-        #print  "%s;%s" % (dia,CLASSIFICACIO[dia])
-        print ("%s;%s;%s;%s" %(dia,TIPUS_SFC[dia],TIPUS_500[dia],CLASSIFICACIO[dia]))
-    pass
+        # print  "%s;%s" % (dia,CLASSIFICACIO[dia])
+        print("%s;%s;%s;%s" % (dia, TIPUS_SFC[dia],
+                               TIPUS_500[dia], CLASSIFICACIO[dia]))
