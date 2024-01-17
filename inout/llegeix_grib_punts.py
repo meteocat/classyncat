@@ -2,7 +2,22 @@
 import xarray as xr
 
 
-def llegeix_grib_punts(input_dir, punts1, punts2):
+def llegeix_grib_punts(input_dir: str, punts1: str, punts2: str) -> dict:
+    """Read the gribs and calculate a grib with the data
+    on the grid points that will be used for the Jenkinson
+    and Collison calculations.
+
+    Args:
+        input_dir (str): Data where the grib were saved.
+        punts1 (str): ASCII file with the grid points for 
+        calculate Jenkinson and Collison at surface.
+        punts2 (str): ASCII file with the grid points for 
+        calculate Jenkinson and Collison at 500 mb.
+
+    Returns:
+        dict: grid1 and grid2 are the dictionaries for sfc
+        and 500 mb respectively.
+    """
 
     # Read the grid points
     points1 = []

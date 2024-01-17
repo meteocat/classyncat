@@ -1,40 +1,46 @@
-'''
-Tipus simplificats:
+def classyncat(tipus_sfc: dict, tipus_500: dict) -> dict:
+    """This subroutine is the main core of the synoptic classification in which
+    is based in:
+    Miró et al(2020): Daily atmospheric circulation patterns for Catalonia
+    (northeast Iberian Peninsula) using a modified version of Jenkinson and
+    Collison method.
+    Respect the original we've made some changes:
+    TIP11 (Dana in the SW) was assimilated to TIP09 (SW advection)
+    TIP13 (Thermal Low) and TIP14 (Barometric swamp) were fussioned.
+    TIP16 (Anticiclo Termic) ha estat assimilat al anticiclo normal (TIP13)    
 
-TIP01: Adveccio Oest
-TIP02: Adveccio del Oest Anticiclonica
-TIP03: Adveccio del NW
-TIP04: Adveccio del N
-TIP05: Adveccio del NE
-TIP06: Adveccio del E
-TIP07: Adveccio del E amb gota freda
-TIP08: Adveccio del S
-TIP09: Adveccio del SW
-TIP10: Solc
-TIP11: Ciclo
-TIP12: Indefinit o baixa superficial
-TIP13: Anticiclo
-'''
+    Types:
+    TIP01: Adveccio Oest
+    TIP02: Adveccio del Oest Anticiclonica
+    TIP03: Adveccio del NW
+    TIP04: Adveccio del N
+    TIP05: Adveccio del NE
+    TIP06: Adveccio del E
+    TIP07: Adveccio del E amb gota freda
+    TIP08: Adveccio del S
+    TIP09: Adveccio del SW
+    TIP10: Solc
+    TIP11: Ciclo
+    TIP12: Indefinit o baixa superficial
+    TIP13: Anticiclo
 
+    Args:
+        tipus_sfc (dict): Corresponding types calcultad with surface pressure
+        tipus_500 (dict): Corresponding types calcultad with 500mb geopotential
 
-def classyncat(tipus_sfc, tipus_500):
+    Returns:
+        dict: classificacio obtinguda amb la combinació de les dues 
+        classificacions.
+    """
 
-    # This subroutine is the main core of the synoptic classification in which
-    # from the previously calculated classifications of J&C in sfc and 500 mb
-    # we define a type related to the Martin Vide (2014) manual classification.
-    # Respect the original we've made some changes:
-    # TIP11 (Dana in the SW) was assimilated to TIP09 (SW advection)
-    # TIP13 (Thermal Low) and TIP14 (Barometric swamp) were fussioned.
-    # TIP16 (Anticiclo Termic) ha estat assimilat al anticiclo normal (TIP13)
-    # The original types were reduced to 13.
-
-    tipus = 'kk'
+    tipus = 'None'
     classificacio = {}
 
     for dia in tipus_sfc.keys():
         tipus1 = tipus_sfc[dia]
         tipus2 = tipus_500[dia]
-
+        # Slicing for the types in sfc and 500 we construct the new
+        # classification
         if (tipus1 == 'A'):
             if (tipus2[0] == 'C'):
                 if (tipus2 == 'C'):

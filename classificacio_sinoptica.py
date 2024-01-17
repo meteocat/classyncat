@@ -20,7 +20,8 @@ if __name__ == '__main__':
     DATE_INI = "2022-02-01"
     DATE_FI = "2022-05-13"
     # Calculem la latitud central que despres s'usara per J&C
-    # download_ERA5(date_ini=DATE_INI, date_fi=DATE_FI)
+    # download_ERA5(date_ini=DATE_INI, date_fi=DATE_FI, 
+    #                input_dir=INPUT_DIR)
     CENLAT = calcula_centre_graella(PUNTS1)
     GRID_SLP, GRID_500 = llegeix_grib_punts(input_dir=INPUT_DIR, 
                                             punts1=PUNTS1, punts2=PUNTS2)
