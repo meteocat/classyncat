@@ -1,29 +1,36 @@
 
-from eccodes import (codes_grib_new_from_file, codes_grib_find_nearest,
-                     codes_get, codes_release)
+import xarray as xr
 
 
-def llegeix_grib_punts(input, punts):
+def llegeix_grib_punts(input_dir, punts1, punts2):
 
-    grid_dict = {}
-    f = open(input)
+    # Read the grid points
+    points1 = []
+    points2 = []
+    fp1 = open(punts1, 'Ur')
+    fp2 = open(punts2, 'Ur')
 
-    while 1:
-        # Read the grid points
-        points = []
-        fp = open(punts, 'Ur')
-        gid = codes_grib_new_from_file(f)
-        if gid is None:
-            break
-        for line in fp:
-            points.append(tuple(line.strip().split(' ')))
-        grid = []
-        for lat, lon in points:
-            nearest = codes_grib_find_nearest(gid, float(lat), float(lon))[0]
-            grid.append(nearest.value)
-        dia = codes_get(gid, "dataDate")
+    for line in fp1:
+        points1.append(tuple(line.strip().split(' ')))
+    for line in fp2:
+        points2.append(tuple(line.strip().split(' ')))
 
-        grid_dict[dia] = grid
-        codes_release(gid)
+    files_mslp = input_dir + "era5_daily_slp_*.grb"
+    files_500 = input_dir+"era5_daily_500_*.grb"
 
-    return grid_dict
+    mslp_df = xr.open_mfdataset(files_mslp).to_dataframe()
+    mb500_df = xr.open_mfdataset(files_500).to_dataframe()
+
+    grid1 = {}
+    grid2 = {}
+    for time in mslp_df.index.get_level_values(0).unique():
+        grid1[time] = []
+        grid2[time] = []
+        for lat, lon in points1:
+            grid1[time].append(float(mslp_df['msl'].loc[time,
+                               float(lat), float(lon)][0]))
+        for lat, lon in points2:
+            grid2[time].append(float(mb500_df['z'].loc[time,
+                               float(lat), float(lon)][0]))
+
+    return grid1, grid2
