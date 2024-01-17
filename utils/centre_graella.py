@@ -1,4 +1,10 @@
-def calcula_centre_graella(punts):
+def calcula_centre_graella(punts: str) -> float:
+    """Given the grid points this subroutine calculates
+    the central latitude of that.
+
+    Returns:
+        float: latitude of the center of grid.
+    """
     
     graella = []
     fp = open(punts, 'Ur')
