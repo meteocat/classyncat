@@ -7,7 +7,18 @@ Created on 14 Jun 2017
 import numpy as np
 
 
-def jenkinson_collison_sfc(grid_slp, cenlat):
+def jenkinson_collison_sfc(grid, cenlat):
+    """Subroutine which calculates the Jenkinson Collison types for 500 hPa
+    following:
+    Dessouky & Jenkinson(1975): An objective daily catalogue of surface
+    pressure, flow, and vorticity indices for Egypt and it’s use in monthly
+    rainfall forecasting. Meteorological Research Bulleting, Egypt, 11, 1-25.
+
+    Args:
+        grid (dict): dictionary containing for each day the 9 grid points for
+        calculating the parameters.
+        cenlat (float): latitude of the center grid.
+    """
 
     pi = 4*np.arctan(1.)
     deg2rad = pi/180.
@@ -22,9 +33,9 @@ def jenkinson_collison_sfc(grid_slp, cenlat):
 
     classificacio = {}
 
-    for dia in grid_slp.keys():
+    for dia in grid.keys():
         # Change scale pressure (Pa -> hPa )
-        pres = np.array(grid_slp[dia])/100.
+        pres = np.array(grid[dia])/100.
 
         # Wind components
         w = (1./4.)*(pres[6]+2*pres[7]+pres[8]) - \

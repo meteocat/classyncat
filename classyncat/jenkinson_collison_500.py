@@ -1,7 +1,17 @@
 import numpy as np
 
 
-def jenkinson_collison_500(grid_slp, cenlat):
+def jenkinson_collison_500(grid, cenlat):
+    """Subroutine which calculates the Jenkinson Collison types for 500 hPa
+    following:
+    Miró et al(2020): Daily atmospheric circulation patterns for Catalonia
+    (northeast Iberian Peninsula) using a modified version of Jenkinson and
+    Collison method.
+    Args:
+        grid (dict): dictionary containing for each day the 9 grid points for
+        calculating the parameters.
+        cenlat (float): latitude of the center grid.
+    """
 
     pi = 4*np.arctan(1.)
     deg2rad = pi/180.
@@ -15,9 +25,9 @@ def jenkinson_collison_500(grid_slp, cenlat):
 #   Calculation of Jenkinson-Collison for all the days
     classificacio = {}
 
-    for dia in grid_slp.keys():
+    for dia in grid.keys():
         # Change scale pressure (m -> dam )
-        pres = np.array(grid_slp[dia])/10.
+        pres = np.array(grid[dia])/10.
 
         # Wind components
         w = (1./4.)*(pres[6]+2*pres[7]+pres[8])-(1./4.) * \
