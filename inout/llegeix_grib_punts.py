@@ -2,6 +2,7 @@
 import xarray as xr
 import numpy as np
 
+
 def llegeix_grib_punts(input_dir: str, punts1: str, punts2: str) -> dict:
     """Read the gribs and calculate a grib with the data
     on the grid points that will be used for the Jenkinson
