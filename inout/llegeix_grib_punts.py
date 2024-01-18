@@ -30,8 +30,8 @@ def llegeix_grib_punts(input_dir: str, punts1: str, punts2: str) -> dict:
     for line in fp2:
         points2.append(tuple(line.strip().split(' ')))
 
-    files_mslp = input_dir + "era5_daily_slp_*.grb"
-    files_500 = input_dir+"era5_daily_500_*.grb"
+    files_mslp = input_dir + "/era5_slp_*.grb"
+    files_500 = input_dir+"/era5_500_*.grb"
 
     mslp_df = xr.open_mfdataset(files_mslp).to_dataframe()
     mb500_df = xr.open_mfdataset(files_500).to_dataframe()
