@@ -36,6 +36,10 @@ def llegeix_grib_punts(input_dir: str, punts1: str, punts2: str) -> dict:
     mslp_df = xr.open_mfdataset(files_mslp).to_dataframe()
     mb500_df = xr.open_mfdataset(files_500).to_dataframe()
 
+    # Remove possible duplicates in index
+    mslp_df = mslp_df[~mslp_df.index.duplicated(keep='first')]
+    mb500_df = mb500_df[~mb500_df.index.duplicated(keep='first')]
+
     grid1 = {}
     grid2 = {}
     for time in mslp_df.index.get_level_values(0).unique():
@@ -43,9 +47,9 @@ def llegeix_grib_punts(input_dir: str, punts1: str, punts2: str) -> dict:
         grid2[time] = []
         for lat, lon in points1:
             grid1[time].append(float(mslp_df['msl'].loc[time,
-                               float(lat), float(lon)][0]))
+                               float(lat), float(lon)]))
         for lat, lon in points2:
             grid2[time].append(float(mb500_df['z'].loc[time,
-                               float(lat), float(lon)][0]))
+                               float(lat), float(lon)]))
 
     return grid1, grid2
