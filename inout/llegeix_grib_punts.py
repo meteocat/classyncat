@@ -45,10 +45,12 @@ def llegeix_grib_punts(input_dir: str, punts1: str, punts2: str) -> dict:
         for lat, lon in points1:
             grid1[time].append(mslp_df['msl'].sel(time=time,
                                                   latitude=lat,
-                                                  longitude=lon).values)
+                                                  longitude=lon,
+                                                  method="nearest").values)
         for lat, lon in points2:
             grid2[time].append(mb500_df['z'].sel(time=time,
                                                  latitude=lat,
-                                                 longitude=lon).values)
+                                                 longitude=lon,
+                                                 method="nearest").values)
 
     return grid1, grid2
