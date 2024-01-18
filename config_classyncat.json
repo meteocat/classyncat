@@ -1,0 +1,3 @@
+{"input_dir":"/home/jmc/workspace/classyncat/data/ERA5",
+ "mslp_grid_points":"/home/jmc/workspace/classyncat/data/list_points_mslp",
+ "500mb_grid_points":"/home/jmc/workspace/classyncat/data/list_points_500mb"}
