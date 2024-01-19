@@ -7,7 +7,8 @@ import datetime as dt
 
 
 def download_ERA5(date_ini: dt.datetime,
-                  date_fi: dt.datetime, input_dir) -> None:
+                  date_fi: dt.datetime, 
+                  input_dir:str, area:list) -> None:
     """Subroutine to download the ERA5 data from Copernicus
     the data will be saved in grib format and saved in the
     input_dir directory.
@@ -33,7 +34,7 @@ def download_ERA5(date_ini: dt.datetime,
 
     c.retrieve('reanalysis-era5-single-levels', {
         'product_type': 'reanalysis',
-        'area': [50, -20, 30, 10],  # North, West, South, East
+        'area': area,  # North, West, South, East
         'format': 'grib',
         'date': date_ini + '/' + date_fi,
         'variable': 'mean_sea_level_pressure',
@@ -41,7 +42,7 @@ def download_ERA5(date_ini: dt.datetime,
     }, "era5_slp_%s_%s.grb" % (date_ini, date_fi))
 
     c.retrieve('reanalysis-era5-pressure-levels', {
-        'area': [50, -20, 30, 10],  # North, West, South, East.
+        'area': area,  # North, West, South, East.
         'product_type': 'reanalysis',
         'format': 'grib',
         'variable': 'geopotential',
