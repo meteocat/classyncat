@@ -34,6 +34,9 @@ def jenkinson_collison_500(grid, cenlat):
                     (pres[0]+2*pres[1]+pres[2])
         s = sfconstant*((1./4.)*(pres[2]+2*pres[5]+pres[8]) -
                         (1./4.)*(pres[0]+2*pres[3]+pres[6]))
+        
+        print("w", w)
+        print("s", s)
 
         # Angle and strenght of the flux
         d = np.arctan(w/s)*(180/pi)
@@ -51,6 +54,7 @@ def jenkinson_collison_500(grid, cenlat):
         z = zw+zs
 
         # Zonal fluxes
+        print(d)
 
         if (d >= -22.5 and d < 22.5):
             if (s > 0):
@@ -72,6 +76,8 @@ def jenkinson_collison_500(grid, cenlat):
                 direccio = 'NW'
             else:
                 direccio = 'SE'
+
+
         if (d >= -112.5 and d < -67.5):
             if (w > 0):
                 direccio = 'W'
@@ -88,7 +94,6 @@ def jenkinson_collison_500(grid, cenlat):
         if (z > 0):
             if (np.abs(z) <= (3./8.)*f):
                 tipus = direccio
-            tipus = direccio
 
         # Anticyclonic case
         if (z <= 0):
