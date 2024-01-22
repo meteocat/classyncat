@@ -1,52 +1,70 @@
-#!/usr/bin/env python
-import cdsapi
+"""Module to download data from ERA5 API.
+"""
 import os
-import glob
+from os.path import dirname, exists
+from datetime import datetime
 
-import datetime as dt
+import cdsapi
 
 
-def download_ERA5(date_ini: dt.datetime,
-                  date_fi: dt.datetime, 
-                  input_dir:str, area:list) -> None:
-    """Subroutine to download the ERA5 data from Copernicus
-    the data will be saved in grib format and saved in the
-    input_dir directory.
+def download_era5(
+    start_date: datetime, end_date: datetime, area: list, output_dir: str
+) -> None:
+    """Download ERA5 surface and 500 hPa pressure data from Copernicus Data Store
+    between two specific dates and for a specific area.
 
+    Data: Copernicus Climate Change Service (C3S).
 
     Args:
-        date_ini (str): Initial data
-        date_fi (str): End data
-        input_dir (str): Directory where the grib that will be saved.
+        start_date (datetime): First date to download data from.
+        end_date (datetime): Last date to download data from.
+        area (list): Grid extension limits [North, West, South, East].
+        output_dir (str): Directory where data will be downloaded.
     """
+    start_date = start_date.strftime("%Y-%m-%d")
+    end_date = end_date.strftime("%Y-%m-%d")
 
-    # Delete the old data
-    files = glob.glob(input_dir+'/*')
-    if files != []:
-        for f in files:
-            os.remove(f)
+    out_slp_file = f"{output_dir}/era5_slp_{start_date}_{end_date}.grb"
+    out_500_file = f"{output_dir}/era5_500_{start_date}_{end_date}.grb"
 
-    # We change to the directory where data will be put
-    os.chdir(input_dir)
+    if not exists(dirname(out_500_file)) or not exists(dirname(out_slp_file)):
+        raise FileNotFoundError(
+            f"{dirname(out_500_file)} or/and {dirname(out_slp_file)} directories"
+            " do not exist."
+        )
 
-    # Call the api client
     c = cdsapi.Client()
 
-    c.retrieve('reanalysis-era5-single-levels', {
-        'product_type': 'reanalysis',
-        'area': area,  # North, West, South, East
-        'format': 'grib',
-        'date': date_ini + '/' + date_fi,
-        'variable': 'mean_sea_level_pressure',
-        'time': '00:00',
-    }, "era5_slp_%s_%s.grb" % (date_ini, date_fi))
+    if os.path.exists(out_slp_file):
+        print(f"{out_slp_file} already exists and SLP data is not downloaded.")
+    else:
+        c.retrieve(
+            "reanalysis-era5-single-levels",
+            {
+                "product_type": "reanalysis",
+                "area": area,  # North, West, South, East
+                "format": "grib",
+                "date": start_date + "/" + end_date,
+                "variable": "mean_sea_level_pressure",
+                "time": "00:00",
+            },
+            f"{output_dir}/era5_slp_{start_date}_{end_date}.grb",
+        )
 
-    c.retrieve('reanalysis-era5-pressure-levels', {
-        'area': area,  # North, West, South, East.
-        'product_type': 'reanalysis',
-        'format': 'grib',
-        'variable': 'geopotential',
-        'pressure_level': '500',
-        'date': date_ini + '/' + date_fi,
-        'time': '00:00',
-    }, "era5_500_%s_%s.grb" % (date_ini, date_fi))
+    if os.path.exists(out_500_file):
+        print(f"{out_500_file} already exists and 500 hPa pressure data is "
+              "not downloaded.")
+    else:
+        c.retrieve(
+            "reanalysis-era5-pressure-levels",
+            {
+                "area": area,  # North, West, South, East.
+                "product_type": "reanalysis",
+                "format": "grib",
+                "variable": "geopotential",
+                "pressure_level": "500",
+                "date": start_date + "/" + end_date,
+                "time": "00:00",
+            },
+            f"era5_500_{start_date}_{end_date}.grb",
+        )
