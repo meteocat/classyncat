@@ -21,7 +21,7 @@ def get_jc_grib_points(
         calculate Jenkinson and Collison at 500 mb.
 
     Returns:
-        dict: grid1 and grid2 are the dictionaries for sfc
+        dict: grid_mslp and grid_z500 are the dictionaries for sfc
         and 500 mb respectively.
     """
     with open(points_mslp, "Ur", encoding="utf-8") as f_p:
@@ -37,12 +37,12 @@ def get_jc_grib_points(
     data_mslp = xr.open_mfdataset(grib_mslp)
     data_z500 = xr.open_mfdataset(grib_z500)
 
-    grid1 = defaultdict(list)
-    grid2 = defaultdict(list)
+    grid_mslp = defaultdict(list)
+    grid_z500 = defaultdict(list)
 
     for time in np.unique(data_mslp.time.values):
         for lat, lon in points_mslp:
-            grid1[time].append(
+            grid_mslp[time].append(
                 float(
                     data_mslp["msl"]
                     .sel(time=time, latitude=lat, longitude=lon, method="nearest")
@@ -50,7 +50,7 @@ def get_jc_grib_points(
                 )
             )
         for lat, lon in points_z500:
-            grid2[time].append(
+            grid_z500[time].append(
                 float(
                     data_z500["z"]
                     .sel(time=time, latitude=lat, longitude=lon, method="nearest")
@@ -58,6 +58,4 @@ def get_jc_grib_points(
                 )
             )
 
-    print(grid2)
-
-    return {"slp": grid1, "z500": grid2}
+    return {"slp": grid_mslp, "z500": grid_z500}
