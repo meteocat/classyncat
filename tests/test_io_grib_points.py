@@ -2,7 +2,7 @@
 """
 import unittest
 
-from inout.grib_points import get_jc_grib_points
+from classyncat.io.grib_points import get_jc_grib_points
 
 
 class TestIOGribPoints(unittest.TestCase):

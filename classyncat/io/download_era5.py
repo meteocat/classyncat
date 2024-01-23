@@ -68,3 +68,5 @@ def download_era5(
             },
             f"era5_500_{start_date}_{end_date}.grb",
         )
+
+    return out_slp_file, out_500_file

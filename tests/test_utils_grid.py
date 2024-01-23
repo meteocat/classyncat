@@ -2,7 +2,7 @@
 """
 import unittest
 
-from utils.grid import get_grid_from_file
+from classyncat.utils.grid import get_grid_from_file
 
 
 class TestUtilsGrid(unittest.TestCase):
