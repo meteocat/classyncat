@@ -14,15 +14,16 @@ def get_jc_grib_points(
     and Collison calculations.
 
     Args:
-        input_dir (str): Data where the grib were saved.
-        punts1 (str): ASCII file with the grid points for
-        calculate Jenkinson and Collison at surface.
-        punts2 (str): ASCII file with the grid points for
-        calculate Jenkinson and Collison at 500 mb.
+        grib_mslp (str): Mean Sea Level Pressure grib file.
+        points_mslp (str): ASCII file including grid points to calculate
+            Jenkinson-Collison circulation type.
+        grib_z500 (str): Geopotential Height at 500 hPa grib file.
+        points_z500 (str): ASCII file including grid points to calculate
+            Jenkinson-Collison circulation type.
 
     Returns:
-        dict: grid_mslp and grid_z500 are the dictionaries for sfc
-        and 500 mb respectively.
+        list: Mean Sea Level Pressure and Geopotential Height at 500 hPa data at
+            specified points.
     """
     with open(points_mslp, "Ur", encoding="utf-8") as f_p:
         points_mslp = []
@@ -58,4 +59,4 @@ def get_jc_grib_points(
                 )
             )
 
-    return {"slp": grid_mslp, "z500": grid_z500}
+    return grid_mslp, grid_z500
