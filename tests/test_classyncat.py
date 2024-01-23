@@ -1,15 +1,30 @@
+"""Module to test Classyncat circulation pattern classification."""
 import unittest
-import numpy as np
 
 from classyncat.classyncat import classyncat
 
 
 class TestClassyncat(unittest.TestCase):
-
+    """Class to test Classyncat classification"""
     def test_classyncat(self):
-        tipus_sfc = {'2012-01-01': 'U'}
-        tipus_500 = {'2012-01-01': 'C'}
+        """Test Classyncat classification"""
+        cc_type = classyncat("A", "E")
+        self.assertEqual(cc_type, 'TIP13')
 
-        type = classyncat(tipus_sfc, tipus_500)
-        print(type)
-        self.assertEqual(list(type.values()),['TIP10'])
+        cc_type = classyncat("C", "E")
+        self.assertEqual(cc_type, 'TIP12')
+
+        cc_type = classyncat("C", "W")
+        self.assertEqual(cc_type, 'TIP12')
+
+        cc_type = classyncat("S", "C")
+        self.assertEqual(cc_type, 'TIP08')
+
+        cc_type = classyncat("S", "A")
+        self.assertEqual(cc_type, 'TIP08')
+
+        cc_type = classyncat("U", "C")
+        self.assertEqual(cc_type, 'TIP10')
+
+        cc_type = classyncat("U", "CS")
+        self.assertEqual(cc_type, 'TIP09')
