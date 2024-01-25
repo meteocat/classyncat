@@ -19,12 +19,12 @@ if __name__ == "__main__":
     config = load_config("config_classyncat.json")
 
     # Grid points to be used for the Jenkinson and Collison calculations
-    points_mslp_file = config["mslp_grid_points"]
-    points_z500_file = config["500mb_grid_points"]
+    points_mslp = config["mslp_grid_points"]
+    points_z500 = config["500mb_grid_points"]
 
     # Calculate the center latitude of the grid and its extension for mslp and z500
-    lat_0_mslp, extension_mslp = get_grid_from_file(points_mslp_file)
-    lat_0_z500, extension_z500 = get_grid_from_file(points_z500_file)
+    lat_0_mslp, extension_mslp = get_grid_from_file(points_mslp)
+    lat_0_z500, extension_z500 = get_grid_from_file(points_z500)
 
     # Maximum extension between mslp and z500
     area = [
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     # Process grib files downloaded from ERA5 API
     grid_mslp, grid_z500 = get_jc_grib_points(
-        grib_mslp, points_mslp_file, grib_z500, points_z500_file
+        grib_mslp, points_mslp, grib_z500, points_z500
     )
 
     # Calculate circulation weather patterns types JC
