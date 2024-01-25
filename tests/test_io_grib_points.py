@@ -13,13 +13,21 @@ class TestIOGribPoints(unittest.TestCase):
 
         grib_mslp = "tests/data/era5_slp_2022-02-01.grb"
         grib_z500 = "tests/data/era5_500_2022-02-01.grb"
-        points_mslp = "tests/data/list_points_mslp"
-        points_z500 = "tests/data/list_points_500mb"
 
-        grib_points = get_jc_grib_points(grib_mslp, points_mslp, grib_z500, points_z500)
+        points_mslp = [[45.0, -10.0], [45.0, 0.0], [45.0, 10.0],
+                       [40.0, -10.0], [40.0, 0.0], [40.0, 10.0],
+                       [35.0, -10.0], [35.0, 0.0], [35.0, 10.0]]
+
+        points_z500 = [[45.0, -15.0], [45.0, -5.0], [45.0, 5.0],
+                       [40.0, -15.0], [40.0, -5.0], [40.0, 5.0],
+                       [35.0, -15.0], [35.0, -5.0], [35.0, 5.0]]
+
+        grib_mslp, grib_z500 = get_jc_grib_points(
+            grib_mslp, points_mslp, grib_z500, points_z500
+        )
 
         self.assertEqual(
-            list(grib_points["slp"].values())[0],
+            list(grib_mslp.values())[0],
             [
                 103958.5625,
                 103220.5625,
@@ -33,7 +41,7 @@ class TestIOGribPoints(unittest.TestCase):
             ],
         )
         self.assertEqual(
-            list(grib_points["z500"].values())[0],
+            list(grib_z500.values())[0],
             [
                 57784.3359375,
                 56880.0859375,

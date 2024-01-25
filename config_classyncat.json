@@ -1,3 +1,11 @@
-{"input_dir":"/home/jmc/workspace/classyncat/data/ERA5",
- "mslp_grid_points":"/home/jmc/workspace/classyncat/data/list_points_mslp",
- "500mb_grid_points":"/home/jmc/workspace/classyncat/data/list_points_500mb"}
+{
+    "input_dir": "/home/jmc/workspace/classyncat/data/ERA5",
+    
+    "mslp_grid_points": [[45.0, -10.0], [45.0, 0.0], [45.0, 10.0],
+                         [40.0, -10.0], [40.0, 0.0], [40.0, 10.0],
+                         [35.0, -10.0], [35.0, 0.0], [35.0, 10.0]],
+    
+    "500mb_grid_points": [[45.0, -15.0], [45.0, -5.0], [45.0, 5.0],
+                          [40.0, -15.0], [40.0, -5.0], [40.0, 5.0],
+                          [35.0, -15.0], [35.0, -5.0], [35.0, 5.0]]
+}

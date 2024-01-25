@@ -2,18 +2,20 @@
 """
 
 
-def get_grid_from_file(file_points: str) -> float:
+def get_grid_from_file(grid_points: list) -> float:
     """Given the grid points this subroutine calculates
-    the central latitude of that.
+    the central latitude of it.
+
+    Args:
+        grid_points (list): Grid points [lat, lon] to calculate Jenkinson-Collison
+            circulation type.
+
+    Raises:
+        ValueError: If `grid_points` not properly configured as [lat, lon] pairs.
 
     Returns:
-        float: latitude of the center of grid.
+        float: Center latitude of the grid.
     """
-    grid_points = []
-    with open(file_points, "Ur", encoding="utf-8") as f_p:
-        for line in f_p:
-            grid_points.append(line.strip().split(" "))
-
     try:
         lat_points = [float(grid_point[0]) for grid_point in grid_points]
         lon_points = [float(grid_point[1]) for grid_point in grid_points]
@@ -25,7 +27,7 @@ def get_grid_from_file(file_points: str) -> float:
         lon_e = max(lon_points)
     except ValueError as err:
         raise ValueError(
-            "`file_points` points may not be properly configured. They "
+            "`grid_points` points may not be properly configured. They "
             "must be latitude and longitude coordinates separated by a "
             "white space and each point in a new line."
         ) from err
