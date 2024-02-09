@@ -1,25 +1,26 @@
-# Classyncat #
+## **Classyncat: A Synoptic Classification Method**
 
-Classyncat is a synoptic classification based on thresholds which is an evolution of the Jenkison-Collison classification adding 
-the level of the 500 hPa geopotential. The resultant classification is obtained combining the surface and at 500 hPa types obtaining an objective synoptical classification
-only 13 types which is straight-forward to use. The types obtained are based in the manual classification of Martin-Vide.
-This classification is basically oriented to the NE of the Iberian Peninsula but could be adapted at any place in the world changing the
-types to the most significative of the region of interest.
-The data used are obtained from ERA5 reanalysis.
+*Classyncat* is a synoptic classification method based on thresholds, representing an evolution of the Jenkison-Collison classification.
+This approach introduces the incorporation of the 500 hPa geopotential level. The resulting classification is achieved by combining surface
+and 500 hPa types, yielding an objective synoptical classification with only 13 types, making it straightforward to use.
 
-### How to install ###
+While primarily oriented to the northeast of the Iberian Peninsula, this classification method can be adapted for use in any location worldwide
+by adjusting the types based on the most significant patterns in the region of interest.
+The data used for this classification was from ERA5 reanalysis Citing the data:
 
-* Basic installation command
-* Conda environment
+*Hersbach, H., Bell, B., Berrisford, P., Biavati, G., Horányi, A., Muñoz Sabater, J., Nicolas, J., Peubey, C., Radu, R., Rozum, I., Schepers, D., Simmons, A., Soci, C., Dee, D., Thépaut, J-N. (2023): ERA5 hourly data on pressure levels from 1940 to present. Copernicus Climate Change Service (C3S) Climate Data Store (CDS), DOI: 10.24381/cds.bd0915c6.*
 
-### How to run:
+### **How to Run**
 
-* You must configure the options in: config_classyncat.json, for indicating the grid points to use in the Jenkinson-Collison classification and the location where to put the ERA5 data.
-* Before runing the classification you must change data_ini and date_end  variablles in the script synoptic_classification.py.
-* For runing the classification you must run: synoptic_classification.py.
-* The results obtained are saved in a csv file: "classificacio_yy1mm1dd1_yy2mm2dd2.csv  (where yy1mm1dd1 is initial data and yy2mm2dd2 is the final data)
+1. **Configure Options:**
+   - Edit the `config_classyncat.json` file to specify the grid points for the Jenkinson-Collison classification and the location for ERA5 data.
 
+2. **Set Date Range:**
+   - Prior to running the classification, update the variables `start_date` and `end_date` in the `synoptic_classification.py` script to define the desired period.
 
-### How to cite:
+3. **Run the Classification:**
+   - Execute the `synoptic_classification.py` script to perform the synoptic classification.
 
-* Miró, J. R., Pepin, N., Peña, J. C., & Martin-Vide, J. (2020). Daily atmospheric circulation patterns for Catalonia (northeast Iberian Peninsula) using a modified version of Jenkinson and Collison method. Atmospheric Research, 231, 104674.
+### **How to Cite**
+
+*Miró, J. R., Pepin, N., Peña, J. C., & Martin-Vide, J. (2020). Daily atmospheric circulation patterns for Catalonia (northeast Iberian Peninsula) using a modified version of Jenkinson and Collison method. Atmospheric Research, 231, 104674.*
