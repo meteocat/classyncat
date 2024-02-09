@@ -25,11 +25,10 @@ def get_grid_from_file(grid_points: list) -> float:
 
         lon_w = min(lon_points)
         lon_e = max(lon_points)
-    except ValueError as err:
-        raise ValueError(
+    except IndexError as err:
+        raise IndexError(
             "`grid_points` points may not be properly configured. They "
-            "must be latitude and longitude coordinates separated by a "
-            "white space and each point in a new line."
+            "must be a list of latitude and longitude coordinate tuples."
         ) from err
 
     center = (lat_s + lat_n) / 2
