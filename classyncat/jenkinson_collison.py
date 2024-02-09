@@ -1,9 +1,12 @@
-"""Module to calculate Jenkinson-Collison circulation type"""
+"""Module to calculate Jenkinson-Collison circulation type.
+"""
+
 import numpy as np
 
 
 def __jenkinson_collison_parameters(grid: np.array, lat_0: float) -> list:
-    """Calculation of Jenkinson-Collison parameters: zonal and meridional components,
+    """
+    Calculation of Jenkinson-Collison parameters: zonal and meridional components,
     wind direction, wind speed, and vorticity.
 
     Args:
@@ -80,7 +83,8 @@ def __jenkinson_collison_fluxes(d: float, s: float, w: float) -> str:
 
 
 def jenkinson_collison_sfc(grid: np.array, lat_0: float) -> str:
-    """Calculate the Jenkinson-Collison type using Mean Sea Level Pressure data
+    """
+    Calculate the Jenkinson-Collison type using Mean Sea Level Pressure data
     following:
 
     Dessouky & Jenkinson(1975): An objective daily catalogue of surface pressure, flow,
@@ -118,7 +122,8 @@ def jenkinson_collison_sfc(grid: np.array, lat_0: float) -> str:
 
 
 def jenkinson_collison_500(grid: np.array, lat_0: float) -> str:
-    """Calculate the Jenkinson-Collison type using Geopotential Height at 500 hPa data
+    """
+    Calculate the Jenkinson-Collison type using Geopotential Height at 500 hPa data
     following:
 
     Dessouky & Jenkinson(1975): An objective daily catalogue of surface pressure, flow,

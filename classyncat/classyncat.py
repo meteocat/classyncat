@@ -7,7 +7,8 @@ Miró et al(2020): Daily atmospheric circulation patterns for Catalonia
 
 
 def classyncat(jc_sfc: str, jc_500: str) -> str:
-    """Synoptic circulation classification based on Miró et al., (2020) "Daily
+    """
+    Synoptic circulation classification based on Miró et al., (2020) "Daily
     atmospheric circulation patterns for Catalonia (northeast Iberian Peninsula)
     using a modified version of Jenkinson and Collison method.
 

@@ -1,11 +1,13 @@
 """Module to import configuration files.
 """
+
 import json
 from os.path import exists
 
 
 def load_config(config_file: str) -> dict:
-    """Load configuration .json file.
+    """
+    Load configuration .json file.
 
     Args:
         config_file (str): Path to a configuration file in .json format.

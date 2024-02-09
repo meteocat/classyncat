@@ -1,5 +1,6 @@
 """Main script of Classyncat.
 """
+
 from datetime import datetime
 
 from classyncat.classyncat import classyncat
@@ -18,9 +19,17 @@ if __name__ == "__main__":
     # Read the configuration file
     config = load_config("config_classyncat.json")
 
+    if config.keys() < set(
+        ["mslp_grid_points", "z500_grid_points", "era5_data_dir", "output_file"]
+    ):
+        raise KeyError(
+            "Configuration file must include, at least, the following keys: "
+            "mslp_grid_points, z500_grid_points, era5_data_dir, output_file."
+        )
+
     # Grid points to be used for the Jenkinson and Collison calculations
     points_mslp = config["mslp_grid_points"]
-    points_z500 = config["500mb_grid_points"]
+    points_z500 = config["z500_grid_points"]
 
     # Calculate the center latitude of the grid and its extension for mslp and z500
     lat_0_mslp, extension_mslp = get_grid_from_file(points_mslp)
@@ -39,7 +48,7 @@ if __name__ == "__main__":
         start_date=start_date,
         end_date=end_date,
         area=area,
-        output_dir=config["input_dir"],
+        output_dir=config["era5_data_dir"],
     )
 
     # Process grib files downloaded from ERA5 API
@@ -49,18 +58,22 @@ if __name__ == "__main__":
 
     # Calculate circulation weather patterns types JC
     classyncat_types = {}
-    for time in grid_mslp.keys():
+    for valid_time, mslp_data in grid_mslp.items():
         # Calculate the Jenkinson & Collison for sfc
-        jc_sfc = jenkinson_collison_sfc(grid_mslp, lat_0_mslp)
+        jc_sfc = jenkinson_collison_sfc(mslp_data, lat_0_mslp)
         # Calculate the Jenkinson & Collison for 500 hPa
-        jc_500 = jenkinson_collison_500(grid_z500, lat_0_z500)
+        jc_500 = jenkinson_collison_500(grid_z500[valid_time], lat_0_z500)
         # Combine both classifications to obtain Classyncat
         classyncat_type = classyncat(jc_sfc, jc_500)
 
-        classyncat_types[time] = classyncat_type
+        classyncat_types[valid_time] = classyncat_type
 
     # Define output file name
-    output_file = config["output_file"].format(start_date=start_date, end_date=end_date)
+    start_date_str = datetime.strftime(start_date, "%Y%m%d")
+    end_date_str = datetime.strftime(start_date, "%Y%m%d")
+    output_file = config["output_file"].format_map(
+        {"start_date": start_date_str, "end_date": end_date_str}
+    )
 
     # Export results as csv file
     write_csv(classyncat_types, output_file)

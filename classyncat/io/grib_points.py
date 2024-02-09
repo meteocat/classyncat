@@ -13,7 +13,8 @@ def get_jc_grib_points(
     grib_z500: str | xr.Dataset,
     points_z500: list,
 ) -> dict:
-    """Read mean sea level pressure (`grib_mlsp`) and 500 hPa geopotential height
+    """
+    Read mean sea level pressure (`grib_mlsp`) and 500 hPa geopotential height
     (`grib_z500`) gribs for specified points that will later be used for the Jenkinson
     and Collison calculations.
 

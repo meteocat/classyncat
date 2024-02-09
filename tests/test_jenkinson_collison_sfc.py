@@ -1,4 +1,6 @@
-"""Module to test JC surface classification"""
+"""Module to test JC surface classification.
+"""
+
 import unittest
 
 import numpy as np

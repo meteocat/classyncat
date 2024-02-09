@@ -1,17 +1,17 @@
-"""Module to calculate spatial grid.
+"""Module to calculate central latitude and extension of grid.
 """
 
 
 def get_grid_from_file(grid_points: list) -> float:
-    """Given the grid points this subroutine calculates
-    the central latitude of it.
+    """
+    Calculate the central latitude and extension given the grid points.
 
     Args:
-        grid_points (list): Grid points [lat, lon] to calculate Jenkinson-Collison
-            circulation type.
+        grid_points (list): Grid points tuples [(lat, lon), ...] to calculate
+            Jenkinson-Collison circulation type.
 
     Raises:
-        ValueError: If `grid_points` not properly configured as [lat, lon] pairs.
+        ValueError: If `grid_points` not properly configured as (lat, lon) pairs.
 
     Returns:
         float: Center latitude of the grid.
@@ -31,8 +31,8 @@ def get_grid_from_file(grid_points: list) -> float:
             "must be a list of latitude and longitude coordinate tuples."
         ) from err
 
-    center = (lat_s + lat_n) / 2
+    lat_0 = (lat_s + lat_n) / 2
 
     grid_extension = [lat_n, lon_w, lat_s, lon_e]
 
-    return center, grid_extension
+    return lat_0, grid_extension
