@@ -66,7 +66,7 @@ def download_era5(
                 "date": start_date + "/" + end_date,
                 "time": "00:00",
             },
-            f"era5_500_{start_date}_{end_date}.grb",
+            f"{output_dir}/era5_500_{start_date}_{end_date}.grb",
         )
 
     return out_slp_file, out_500_file
