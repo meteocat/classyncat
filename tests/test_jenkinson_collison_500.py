@@ -40,6 +40,16 @@ class TestJenkinsonCollison500(unittest.TestCase):
         jc_type = jenkinson_collison_500(grib_data.flatten(), self.center)
         self.assertEqual(jc_type, "C")
 
+        grib_data = np.array(
+            [
+                [103900, 103900, 103900],
+                [103900, 103900, 103900],
+                [103900, 103900, 103900],
+            ]
+        )
+        jc_type = jenkinson_collison_500(grib_data.flatten(), self.center)
+        self.assertEqual(jc_type, "U")
+
     def test_jenkinson_collison_500_compound_types(self):
         """Test Jenkinson Collison z500 classification compound types"""
         grib_data = np.array(
