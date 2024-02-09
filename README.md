@@ -8,7 +8,7 @@ While primarily oriented to the northeast of the Iberian Peninsula, this classif
 by adjusting the types based on the most significant patterns in the region of interest.
 The data used for this classification was from ERA5 reanalysis Citing the data:
 
-*Hersbach, H., Bell, B., Berrisford, P., Biavati, G., Horányi, A., Muñoz Sabater, J., Nicolas, J., Peubey, C., Radu, R., Rozum, I., Schepers, D., Simmons, A., Soci, C., Dee, D., Thépaut, J-N. (2023): ERA5 hourly data on pressure levels from 1940 to present. Copernicus Climate Change Service (C3S) Climate Data Store (CDS), DOI: 10.24381/cds.bd0915c6.*
+*Hersbach, H., Bell, B., Berrisford, P., Biavati, G., Horányi, A., Muñoz Sabater, J., Nicolas, J., Peubey, C., Radu, R., Rozum, I., Schepers, D., Simmons, A., Soci, C., Dee, D., Thépaut, J-N. (2023): ERA5 hourly data on pressure levels from 1940 to present. Copernicus Climate Change Service (C3S) Climate Data Store (CDS), DOI: [10.24381/cds.bd0915c6.](10.24381/cds.bd0915c6.)*
 
 ### **How to Run**
 
@@ -23,4 +23,4 @@ The data used for this classification was from ERA5 reanalysis Citing the data:
 
 ### **How to Cite**
 
-*Miró, J. R., Pepin, N., Peña, J. C., & Martin-Vide, J. (2020). Daily atmospheric circulation patterns for Catalonia (northeast Iberian Peninsula) using a modified version of Jenkinson and Collison method. Atmospheric Research, 231, 104674.*
+*Miró, J. R., Pepin, N., Peña, J. C., & Martin-Vide, J. (2020). Daily atmospheric circulation patterns for Catalonia (northeast Iberian Peninsula) using a modified version of Jenkinson and Collison method. Atmospheric Research, 231, 104674. [https://doi.org/10.1016/j.atmosres.2019.104674](https://doi.org/10.1016/j.atmosres.2019.104674)*
