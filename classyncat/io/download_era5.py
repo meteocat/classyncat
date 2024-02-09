@@ -1,5 +1,6 @@
 """Module to download data from ERA5 API.
 """
+
 import os
 from os.path import dirname, exists
 from datetime import datetime
@@ -10,7 +11,8 @@ import cdsapi
 def download_era5(
     start_date: datetime, end_date: datetime, area: list, output_dir: str
 ) -> None:
-    """Download ERA5 surface and 500 hPa pressure data from Copernicus Data Store
+    """
+    Download ERA5 surface and 500 hPa pressure data from Copernicus Data Store
     between two specific dates and for a specific area.
 
     Data: Copernicus Climate Change Service (C3S).
@@ -52,8 +54,10 @@ def download_era5(
         )
 
     if os.path.exists(out_500_file):
-        print(f"{out_500_file} already exists and 500 hPa pressure data is "
-              "not downloaded.")
+        print(
+            f"{out_500_file} already exists and 500 hPa pressure data is "
+            "not downloaded."
+        )
     else:
         c.retrieve(
             "reanalysis-era5-pressure-levels",

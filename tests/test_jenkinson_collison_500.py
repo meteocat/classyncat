@@ -1,4 +1,6 @@
-"""Module to test JC z500 classification types"""
+"""Module to test JC z500 classification types.
+"""
+
 import unittest
 import numpy as np
 
