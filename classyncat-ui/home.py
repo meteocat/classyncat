@@ -1,5 +1,6 @@
 """Classyncat User Interface.
 """
+
 import io
 import json
 
@@ -10,8 +11,7 @@ import streamlit as st
 from classyncat.classyncat import classyncat
 from classyncat.io.download_era5 import download_era5
 from classyncat.io.grib_points import get_jc_grib_points
-from classyncat.jenkinson_collison import (jenkinson_collison_500,
-                                           jenkinson_collison_sfc)
+from classyncat.jenkinson_collison import jenkinson_collison_500, jenkinson_collison_sfc
 from classyncat.utils.grid import get_grid_from_file
 
 
@@ -35,7 +35,18 @@ grib_z500 = None
 in_grib_z500 = ""
 
 
-st.title("Classyncat")
+st.set_page_config(
+    page_title="Classyncat",
+    page_icon="classyncat-ui/isobars.png",
+)
+
+
+t_col1, t_col2 = st.columns([1.4, 10])
+with t_col1:
+    st.image("classyncat-ui/isobars.png")
+with t_col2:
+    st.markdown("# Classyncat")
+
 
 st.write(
     "Aquesta interfície permet obtenir la classificació sinòpitca utilitzant la "
@@ -218,7 +229,8 @@ with tab2:
                 """
                 A mode d'exemple podeu seleccionar el fitxer:
                 - /data/RECERCA/devpyram01/classyncat/config_classyncat.json
-                """)
+                """
+            )
 
         if config_file is not None:
             # Read JSON file
@@ -250,7 +262,8 @@ with tab2:
             A mode d'exemple podeu seleccionar els fitxers:
             - /data/RECERCA/devpyram01/classyncat/era5_slp_2024-01-01_2024-01-03.grb
             - /data/RECERCA/devpyram01/classyncat/era5_500_2024-01-01_2024-01-03.grb
-            """)
+            """
+        )
 
     in_grib_mslp = st.file_uploader("Fitxer MSLP: ", type="grb", disabled=uploader_dsbl)
     in_grib_z500 = st.file_uploader("Fitxer Z500: ", type="grb", disabled=uploader_dsbl)
@@ -313,6 +326,7 @@ with tab2:
             progress_bar.progress(progress, text=progress_text)
 
         import time
+
         time.sleep(1)
 
         progress_bar.empty()
@@ -332,3 +346,10 @@ with tab2:
             "text/csv",
             key="download-csv",
         )
+
+st.markdown(
+    """
+    Logo:
+    [Forecast icons created by geotatah](https://www.flaticon.com/free-icons/forecast)
+    """
+)
